@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    # Rest Framework
+    'rest_framework',
+    # User Apps
+    'score',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -51,6 +55,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # User Defined Middleware
+    'score.middleware.ScoreMiddleware',
 ]
 
 ROOT_URLCONF = 'Kube_Server.urls'
