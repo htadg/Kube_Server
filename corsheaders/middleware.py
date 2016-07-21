@@ -103,7 +103,7 @@ class CorsMiddleware(object):
         """
         Add the respective CORS headers
         """
-        origin = 'http://'+request.META['REMOTE_ADDR']
+        origin = 'http://'+request.META['REMOTE_HOST']
         print origin
         if self.is_enabled(request) and origin:
             # todo: check hostname from db instead
