@@ -117,9 +117,10 @@ class CorsMiddleware(object):
                     self.origin_not_found_in_white_lists(origin, url)):
                 return response
 
-            response[ACCESS_CONTROL_ALLOW_ORIGIN] = "*" if (
-                settings.CORS_ORIGIN_ALLOW_ALL and
-                not settings.CORS_ALLOW_CREDENTIALS) else origin
+            # response[ACCESS_CONTROL_ALLOW_ORIGIN] = "*" if (
+            #     settings.CORS_ORIGIN_ALLOW_ALL and
+            #     not settings.CORS_ALLOW_CREDENTIALS) else origin
+            response[ACCESS_CONTROL_ALLOW_ORIGIN] = "*" if settings.CORS_ORIGIN_ALLOW_ALL else origin
 
             if len(settings.CORS_EXPOSE_HEADERS):
                 response[ACCESS_CONTROL_EXPOSE_HEADERS] = ', '.join(

@@ -12,6 +12,7 @@ class ScoreMiddleware():
            seed += 1
 
     def process_request(self, request):
+        print request.META.get('REMOTE_ADDR')
         if not 'kube-key' in request.session or request.session['kube-key'] == '':
             session_key = next(self.generate_key())
             print "New Session Created"
