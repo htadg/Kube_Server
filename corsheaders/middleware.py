@@ -65,7 +65,7 @@ class CorsMiddleware(object):
 
             try:
                 http_referer = request.META['HTTP_REFERER']
-                http_host = "https://%s/" % request.META['HTTP_HOST']
+                http_host = "http://%s/" % request.META['HTTP_HOST']
                 request.META = request.META.copy()
                 request.META['ORIGINAL_HTTP_REFERER'] = http_referer
                 request.META['HTTP_REFERER'] = http_host
