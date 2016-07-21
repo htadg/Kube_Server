@@ -14,9 +14,6 @@ class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
-        kwargs['Access-Control-Allow-Origin'] = 'http://hitensharma.me'
-        kwargs['Access-Control-Allow-Methods'] = 'GET, POST'
-        kwargs['Access-Control-Allow-Credentials'] = False
         super(JSONResponse, self).__init__(content, **kwargs)
 
 
@@ -25,7 +22,13 @@ def get_score(request):
     if request.method == 'GET':
         leaders = LeaderBoard.objects.order_by('-score')
         serializer = ScoreSerializer(leaders[:10], many=True)
-        return JSONResponse(serializer.data)
+        headers = {'Access-Control-Allow-Origin': 'http://hitensharma.me',
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Credentials': False}
+        return JSONResponse(serializer.data, headers=headers)
     else:
+        headers = {'Access-Control-Allow-Origin': 'http://hitensharma.me',
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Credentials': False}
         data = {'status': 'Bad Request Method'}
-        return JSONResponse(data)
+        return JSONResponse(data, headers=headers)
