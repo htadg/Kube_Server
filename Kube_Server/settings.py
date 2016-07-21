@@ -152,7 +152,8 @@ CORS_ORIGIN_WHITELIST = (
         'hitensharma.me',
         'htadg.github.io',
         'vigneshm.com',
-        'vigzmv.github.io'
+        'vigzmv.github.io',
+        '127.0.0.1'
     )
 
 CORS_ALLOW_CREDENTIALS = True
