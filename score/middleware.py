@@ -63,4 +63,4 @@ class XsSharing(object):
             response['Access-Control-Allow-Methods'] = ",".join(XS_SHARING_ALLOWED_METHODS)
             response['Access-Control-Allow-Credentials'] = XS_SHARING_ALLOWED_CREDENTIALS
 
-            return response
+        return response
