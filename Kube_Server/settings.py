@@ -50,7 +50,6 @@ MIDDLEWARE_CLASSES = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # User Defined Middleware
-    'score.middleware.XsSharing',
     'score.middleware.ScoreMiddleware',
     # Django Middleware Continued
     'django.middleware.common.CommonMiddleware',
