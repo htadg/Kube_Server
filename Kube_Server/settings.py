@@ -142,7 +142,7 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-XS_SHARING_ALLOWED_ORIGINS = 'http://htadg.gtihub.io'
+XS_SHARING_ALLOWED_ORIGINS = 'http://hitensharma.me'
 XS_SHARING_ALLOWED_METHODS = ['GET', 'POST']
 XS_SHARING_ALLOWED_CREDENTIALS = False
 
