@@ -1,5 +1,4 @@
 import re
-import socket
 
 from django import http
 try:
@@ -82,6 +81,7 @@ class CorsMiddleware(object):
         view/exception middleware along with the requested view;
         it will call any response middlewares
         """
+
         if self.is_enabled(request) and settings.CORS_REPLACE_HTTPS_REFERER:
             self._https_referer_replace(request)
 
@@ -104,8 +104,8 @@ class CorsMiddleware(object):
         """
         Add the respective CORS headers
         """
-        origin = 'http://'+socket.gethostbyaddr(request.META['REMOTE_ADDR'])[0]
-        print origin
+        origin = request.META.get('HTTP_ORIGIN')
+
         if self.is_enabled(request) and origin:
             # todo: check hostname from db instead
             url = urlparse(origin)
