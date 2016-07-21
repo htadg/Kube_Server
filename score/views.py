@@ -14,6 +14,7 @@ class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
+        kwargs['Access-Control-Allow-Origin'] = True
         super(JSONResponse, self).__init__(content, **kwargs)
 
 
