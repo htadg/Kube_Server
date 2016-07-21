@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Rest Framework
     'rest_framework',
-    # Cors App
-    'corsheaders',
     # User Apps
     'score',
 ]
@@ -52,9 +50,8 @@ MIDDLEWARE_CLASSES = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # User Defined Middleware
+    'score.middleware.XsSharing',
     'score.middleware.ScoreMiddleware',
-    # Cors Middleware
-    'corsheaders.middleware.CorsMiddleware',
     # Django Middleware Continued
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -145,9 +142,7 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Django CORS Settings
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_CREDENTIALS = True
+XS_SHARING_ALLOWED_ORIGINS = 'http://htadg.gtihub.io'
+XS_SHARING_ALLOWED_METHODS = ['GET', 'POST']
+XS_SHARING_ALLOWED_CREDENTIALS = False
 
