@@ -23,8 +23,12 @@ class ScoreMiddleware():
         else:
             print "People are returning"
 
+        return request
+
     def process_response(self, request, response):
 
         response['Access-Control-Allow-Methods'] = 'GET, POST'
         response['Access-Control-Allow-Origin'] = 'http://hitensharma.me'
         response['Access-Control-Allow-Credentials'] = False
+
+        return response
