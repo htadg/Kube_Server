@@ -51,6 +51,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # User Defined Middleware
+    'score.middleware.ScoreMiddleware',
     # Cors Middleware
     'corsheaders.middleware.CorsMiddleware',
     # Django Middleware Continued
@@ -60,8 +62,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # User Defined Middleware
-    'score.middleware.ScoreMiddleware',
 ]
 
 ROOT_URLCONF = 'Kube_Server.urls'

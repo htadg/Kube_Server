@@ -103,7 +103,8 @@ class CorsMiddleware(object):
         """
         Add the respective CORS headers
         """
-        origin = request.META.get('HTTP_ORIGIN')
+        origin = 'http://'+request.META['REMOTE_ADDR']
+        print origin
         if self.is_enabled(request) and origin:
             # todo: check hostname from db instead
             url = urlparse(origin)
@@ -117,10 +118,9 @@ class CorsMiddleware(object):
                     self.origin_not_found_in_white_lists(origin, url)):
                 return response
 
-            # response[ACCESS_CONTROL_ALLOW_ORIGIN] = "*" if (
-            #     settings.CORS_ORIGIN_ALLOW_ALL and
-            #     not settings.CORS_ALLOW_CREDENTIALS) else origin
-            response[ACCESS_CONTROL_ALLOW_ORIGIN] = "*" if settings.CORS_ORIGIN_ALLOW_ALL else origin
+            response[ACCESS_CONTROL_ALLOW_ORIGIN] = "*" if (
+                settings.CORS_ORIGIN_ALLOW_ALL and
+                not settings.CORS_ALLOW_CREDENTIALS) else origin
 
             if len(settings.CORS_EXPOSE_HEADERS):
                 response[ACCESS_CONTROL_EXPOSE_HEADERS] = ', '.join(
