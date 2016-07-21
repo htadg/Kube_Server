@@ -149,12 +149,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Django CORS Settings
 
 CORS_ORIGIN_WHITELIST = (
-
-        'http://localhost:8000',
-        'hitensharma.me',
-        'htadg.github.io',
-        'vigneshm.com',
-        'vigzmv.github.io',
+        'http://127.0.0.1:8000',
+        'http://hitensharma.me',
+        'http://htadg.github.io',
+        'http://vigneshm.com',
+        'http://vigzmv.github.io',
     )
 
 CORS_ALLOW_CREDENTIALS = True
