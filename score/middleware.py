@@ -39,30 +39,28 @@ class XsSharing(object):
         Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE
     """
     def process_request(self, request):
-        if 'score/api/v1/get' not in request.get_full_path():
-            return http.HttpResponse()
+        if 'score/api/v1/get' in request.get_full_path():
 
-        # if 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
-        if request.method in XS_SHARING_ALLOWED_METHODS:
-            response = http.HttpResponse()
-            response['Access-Control-Allow-Origin'] = XS_SHARING_ALLOWED_ORIGINS
-            response['Access-Control-Allow-Methods'] = ",".join(XS_SHARING_ALLOWED_METHODS)
-            response['Access-Control-Allow-Credentials'] = XS_SHARING_ALLOWED_CREDENTIALS
+            # if 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
+            if request.method in XS_SHARING_ALLOWED_METHODS:
+                response = http.HttpResponse()
+                response['Access-Control-Allow-Origin'] = XS_SHARING_ALLOWED_ORIGINS
+                response['Access-Control-Allow-Methods'] = ",".join(XS_SHARING_ALLOWED_METHODS)
+                response['Access-Control-Allow-Credentials'] = XS_SHARING_ALLOWED_CREDENTIALS
 
-            return response
+                return response
 
         return None
 
     def process_response(self, request, response):
 
-        if 'score/api/v1/get' not in request.get_full_path():
-            return response
-        # Avoid unnecessary work
-        if response.has_header('Access-Control-Allow-Origin'):
-            return response
+        if 'score/api/v1/get' in request.get_full_path():
+            # Avoid unnecessary work
+            if response.has_header('Access-Control-Allow-Origin'):
+                return response
 
-        response['Access-Control-Allow-Origin'] = XS_SHARING_ALLOWED_ORIGINS
-        response['Access-Control-Allow-Methods'] = ",".join(XS_SHARING_ALLOWED_METHODS)
-        response['Access-Control-Allow-Credentials'] = XS_SHARING_ALLOWED_CREDENTIALS
+            response['Access-Control-Allow-Origin'] = XS_SHARING_ALLOWED_ORIGINS
+            response['Access-Control-Allow-Methods'] = ",".join(XS_SHARING_ALLOWED_METHODS)
+            response['Access-Control-Allow-Credentials'] = XS_SHARING_ALLOWED_CREDENTIALS
 
-        return response
+            return response
