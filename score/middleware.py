@@ -13,9 +13,18 @@ class ScoreMiddleware():
            seed += 1
 
     def process_request(self, request):
+        request.META['Access-Control-Allow-Methods'] = 'GET, POST'
+        request.META['Access-Control-Allow-Origin'] = 'http://hitensharma.me'
+        request.META['Access-Control-Allow-Credentials'] = False
         if not 'kube-key' in request.session or request.session['kube-key'] == '':
             session_key = next(self.generate_key())
             print "New Session Created"
             request.session['kube-key'] = session_key
         else:
             print "People are returning"
+
+    def process_response(self, request, response):
+
+        response.META['Access-Control-Allow-Methods'] = 'GET, POST'
+        response.META['Access-Control-Allow-Origin'] = 'http://hitensharma.me'
+        response.META['Access-Control-Allow-Credentials'] = False
