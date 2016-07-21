@@ -40,7 +40,7 @@ class XsSharing(object):
     """
     def process_request(self, request):
         if 'score/api/v1/get' not in request.get_full_path():
-            return None
+            return http.HttpResponse()
 
         # if 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
         if request.method in XS_SHARING_ALLOWED_METHODS:
@@ -56,7 +56,7 @@ class XsSharing(object):
     def process_response(self, request, response):
 
         if 'score/api/v1/get' not in request.get_full_path():
-            return None
+            return response
         # Avoid unnecessary work
         if response.has_header('Access-Control-Allow-Origin'):
             return response
