@@ -21,6 +21,8 @@ class JSONResponse(HttpResponse):
 def get_score(request):
     if request.method == 'GET':
         leaders = LeaderBoard.objects.order_by('-score')
+        if not leaders:
+            return JSONResponse({})
         serializer = ScoreSerializer(leaders[:10], many=True)
         return JSONResponse(serializer.data)
     else:

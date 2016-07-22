@@ -25,7 +25,7 @@ SECRET_KEY = "*n%^7i(^o_&!+&9tzw#87gweg&(gce5($&&fuvvz3ucrd+him2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# DEBUG = False
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,21 +43,25 @@ INSTALLED_APPS = [
     'rest_framework',
     # User Apps
     'score',
+    # CORS App
+    'corsheaders',
 ]
 
 MIDDLEWARE_CLASSES = [
+    # Django Middleware
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # User Defined Middleware
-    'score.middleware.ScoreMiddleware',
-    # Django Middleware Continued
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # CORS Middleware
+    'corsheaders.middleware.CorsMiddleware',
+    # User Defined Middleware
+    'score.middleware.ScoreMiddleware',
 ]
 
 ROOT_URLCONF = 'Kube_Server.urls'
@@ -88,7 +92,7 @@ WSGI_APPLICATION = 'Kube_Server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'kube.sqlite3'),
     }
 }
 
@@ -141,7 +145,20 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-XS_SHARING_ALLOWED_ORIGINS = '*'
-XS_SHARING_ALLOWED_METHODS = ['GET', 'POST']
-XS_SHARING_ALLOWED_CREDENTIALS = False
+# CORS Settings
 
+CORS_ORIGIN_WHITELIST = (
+        'hitensharma.me',
+        'htadg.github.io',
+        'vigneshm.com',
+        'vigzmv.github.io',
+        'localhost:5000',
+        '127.0.0.1:5000'
+    )
+
+CORS_ALLOW_METHODS = (
+        'GET',
+        'POST',
+    )
+
+CORS_ALLOW_CREDENTIALS = True

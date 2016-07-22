@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^score/', include('score.urls')),
+    url(r'^api/', include('score.urls')),
 ]
