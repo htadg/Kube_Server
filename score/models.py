@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 @python_2_unicode_compatible
 class LeaderBoard(models.Model):
     name = models.CharField(_("Name"), max_length=50, blank=True, default="Anonymous")
-    score = models.CharField(_("Score"), max_length=3, blank=False)
+    score = models.IntegerField(_("Score"), blank=False)
 
     def __str__(self):
         return "%s" % self.name
