@@ -13,8 +13,11 @@ class PlayerList(APIView):
     List the Score Board or add a new Score
     """
     def get(self, request, format=None):
-        scoreboard = LeaderBoard.objects.all()
-        scoreboard = scoreboard.extra(select={'score': 'CAST(score AS INTEGER)'}).extra(order_by='-score')
+        # scoreboard = LeaderBoard.objects.all()[:10]
+        # scoreboard = scoreboard.extra(select={'score': 'CAST(score AS INT)'}).extra(order_by='-score')
+        # print scoreboard[0]
+        cast = "CAST(score AS INT)"
+        scoreboard = LeaderBoard.objects.extra(select={'casted_score': cast}).order_by('-casted_score')
         serializer = ScoreSerializer(scoreboard[:10], many=True)
         return Response(serializer.data)
 
