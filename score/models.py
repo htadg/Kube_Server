@@ -15,4 +15,5 @@ class LeaderBoard(models.Model):
 
     def save(self, *args, **kwargs):
         self.name = str(self.name).upper()
+        self.score = int(self.score)
         super(LeaderBoard, self).save(*args, **kwargs)
