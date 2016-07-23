@@ -12,3 +12,7 @@ class LeaderBoard(models.Model):
 
     def __str__(self):
         return "%s" % self.name
+
+    def save(self, *args, **kwargs):
+        self.name = str(self.name).upper()
+        super(LeaderBoard, self).save(*args, **kwargs)

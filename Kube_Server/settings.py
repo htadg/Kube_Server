@@ -59,9 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # CORS Middleware
-    'corsheaders.middleware.CorsMiddleware',
-    # User Defined Middleware
-    'score.middleware.ScoreMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'Kube_Server.urls'

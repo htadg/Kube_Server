@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from .views import get_score
+from .views import PlayerList
 
 urlpatterns = [
-    url(r'^v1/get/$', get_score, name='get_score'),
+    url(r'^v1/score/$', PlayerList.as_view()),
 ]

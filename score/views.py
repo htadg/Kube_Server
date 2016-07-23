@@ -1,30 +1,25 @@
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
 from .models import LeaderBoard
 from .serializers import ScoreSerializer
 
 
-class JSONResponse(HttpResponse):
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
+class PlayerList(APIView):
+    """
+    List the Score Board or add a new Score
+    """
+    def get(self, request, format=None):
+        scoreboard = LeaderBoard.objects.order_by('-score')[:10]
+        serializer = ScoreSerializer(scoreboard, many=True)
+        return Response(serializer.data)
 
-
-@csrf_exempt
-def get_score(request):
-    if request.method == 'GET':
-        leaders = LeaderBoard.objects.order_by('-score')
-        if not leaders:
-            return JSONResponse({})
-        serializer = ScoreSerializer(leaders[:10], many=True)
-        return JSONResponse(serializer.data)
-    else:
-        data = {'error': 'Bad Request Method'}
-        return JSONResponse(data)
+    def post(self, request, format=None):
+        serializer = ScoreSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
