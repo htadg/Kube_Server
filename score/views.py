@@ -14,6 +14,7 @@ class PlayerList(APIView):
     """
     def get(self, request, format=None):
         scoreboard = LeaderBoard.objects.order_by('-score')[:10]
+        scoreboard = scoreboard.extra(select={'score': 'CAST(result AS INTEGER)'}).extra(order_by=['-score'])
         serializer = ScoreSerializer(scoreboard, many=True)
         return Response(serializer.data)
 
